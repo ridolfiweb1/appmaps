@@ -97,8 +97,12 @@ function filterEstablishments(type) {
     service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             displayResults(results);
+        } else {
+            console.error('Erro na busca de estabelecimentos:', status);
+            alert('Erro ao buscar estabelecimentos. Tente novamente.');
         }
     });
 }
 
-window.onload = initMap;
+// O mapa será inicializado automaticamente pelo callback da API
+console.log('App.js carregado com sucesso');
