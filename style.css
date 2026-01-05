@@ -103,3 +103,16 @@ button:hover {
 #placesList {
     margin-top: 10px;
 }
+
+#placesList ul {
+    list-style: none;
+    padding: 0;
+}
+
+#placesList li {
+    padding: 10px;
+    margin: 5px 0;
+    border-left: 4px solid #007BFF;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+}

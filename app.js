@@ -65,14 +65,19 @@ function searchEstablishments(address) {
 function findNearbyEstablishments(location) {
     const request = {
         location: location,
-        radius: '500',
+        radius: 500,
         type: ['restaurant', 'cafe', 'bar', 'lodging', 'pharmacy', 'hospital', 'gas_station', 'bank'],
     };
 
-    service = new google.maps.places.PlacesService(map);
+    if (!service) {
+        service = new google.maps.places.PlacesService(map);
+    }
     service.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             displayResults(results);
+        } else {
+            console.error('Erro na busca de estabelecimentos:', status);
+            alert('Erro ao buscar estabelecimentos próximos. Tente novamente.');
         }
     });
 }
@@ -80,17 +85,36 @@ function findNearbyEstablishments(location) {
 function displayResults(places) {
     const placesList = document.getElementById("placesList");
     placesList.innerHTML = "";
-    places.forEach((place) => {
+    
+    if (!places || places.length === 0) {
+        placesList.innerHTML = "<p>Nenhum estabelecimento encontrado.</p>";
+        return;
+    }
+    
+    const ul = document.createElement("ul");
+    places.slice(0, 10).forEach((place) => {
         const li = document.createElement("li");
-        li.textContent = place.name;
-        placesList.appendChild(li);
+        li.innerHTML = `<strong>${place.name}</strong><br/>`;
+        if (place.vicinity) {
+            li.innerHTML += `${place.vicinity}<br/>`;
+        }
+        if (place.rating) {
+            li.innerHTML += `⭐ ${place.rating}`;
+        }
+        ul.appendChild(li);
     });
+    placesList.appendChild(ul);
 }
 
 function filterEstablishments(type) {
+    if (!map || !service) {
+        alert('O mapa ainda está carregando. Tente novamente em alguns segundos.');
+        return;
+    }
+    
     const request = {
         location: map.getCenter(),
-        radius: '500',
+        radius: 500,
         type: [type],
     };
 
