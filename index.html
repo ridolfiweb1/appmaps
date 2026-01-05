@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Estabelecimentos - Ridolfi Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🗺️ Busca de Estabelecimentos</h1>
+            <p>Encontre serviços próximos a você</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="addressInput" placeholder="Digite um endereço ou use sua localização">
+                <button id="searchBtn">Buscar</button>
+                <button id="locationBtn">📍 Minha Localização</button>
+            </div>
+
+            <div class="filters">
+                <h3>Filtros:</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-type="restaurant">🍽️ Restaurantes</button>
+                    <button class="filter-btn" data-type="cafe">☕ Padarias/Cafés</button>
+                    <button class="filter-btn" data-type="bar">🍺 Bares</button>
+                    <button class="filter-btn" data-type="lodging">🏨 Hotéis</button>
+                    <button class="filter-btn" data-type="pharmacy">💊 Farmácias</button>
+                    <button class="filter-btn" data-type="hospital">🏥 Hospitais</button>
+                    <button class="filter-btn" data-type="gas_station">⛽ Postos</button>
+                    <button class="filter-btn" data-type="bank">🏦 Bancos</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <div id="results">
+            <h3>Resultados:</h3>
+            <div id="placesList"></div>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtkL4k0VhLgHI7oSYoM0HDdyYn1IvhvZA&libraries=places&language=pt-BR"></script>
+    <script src="app.js"></script>
+</body>
+</html>
